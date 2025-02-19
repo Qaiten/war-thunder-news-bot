@@ -1,3 +1,14 @@
+<p align="center">
+	<img src="https://media.githubusercontent.com/media/Qaiten/war-thunder-news-bot/main/images/HeaderImage.png" alt="WT News Bot Banner" />
+	<br />
+	<a href="https://github.com/Qaiten/war-thunder-news-bot/wiki">
+		<img src="https://img.shields.io/badge/WT_News_Bot-Wiki-orange.svg?style=for-the-badge&logo=github" alt="Wiki" />
+	</a>
+	<a href="https://discord.gg/XS6w8D8">
+		<img src="https://img.shields.io/discord/532683310409842728.svg?label=Discord&logo=Discord&colorB=7289da&style=for-the-badge" alt="Discord Server">
+	</a>
+</p>
+
 # WarThunder News Bot
 Allows posting of any WarThunder news article to a channel in Discord.
 
