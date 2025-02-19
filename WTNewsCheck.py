@@ -92,7 +92,7 @@ async def on_ready():
         print("No news channel set. Please set it first.")
 
 # Asynchronous task to check for news
-@tasks.loop(seconds=600)  # Check every 600 seconds (10 minutes)
+@tasks.loop(hours=5)  # Check every 5 hours
 async def check_news(channel):
     await bot.wait_until_ready()
 
@@ -131,8 +131,5 @@ async def check_news(channel):
 # Retrieve the token from the environment variable
 token = os.getenv("TOKEN")
 bot.run(token)  # Run the bot with the token from the environment variable
-
-
-# TGC Channel id: 1059515770725486692
 
 input("\nPress Enter to exit...")
