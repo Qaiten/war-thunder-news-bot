@@ -16,24 +16,28 @@ def get_latest_news():
     latest_article = soup.find("a", class_="widget__link")
     
     if latest_article:
-        title = latest_article["href"].split("/")[-1].replace("-", " ").title()  # Extract the title from the URL (you can refine this if needed)
+        # Scrape title from the widget__title div
+        title = latest_article.find_next("div", class_="widget__title").text.strip()
+        
+        # Scrape description from the widget__comment div
+        description = latest_article.find_next("div", class_="widget__comment").text.strip()
+
+        # Scrape image URL from the widget__poster-media img element
+        image_tag = latest_article.find_next("div", class_="widget__poster").find("img")
+        image_url = image_tag["data-src"] if image_tag else None
+        
+        # Ensure the image URL is a full URL (not just a relative path)
+        if image_url and image_url.startswith("//"):
+            image_url = "https:" + image_url
+
+        # Extract the link to the full news article
         link = f"https://warthunder.com{latest_article['href']}"
-        
-        # Scrape additional information from the specific news page
-        article_page = requests.get(link)
-        article_soup = BeautifulSoup(article_page.text, "html.parser")
-        
-        # Try to get the description or summary of the article (you can modify this selector as needed)
-        description = article_soup.find("div", class_="news-text").text.strip() if article_soup.find("div", class_="news-text") else "No description available."
-        
-        # Try to get the image if it exists
-        image_url = article_soup.find("meta", property="og:image")
-        image_url = image_url["content"] if image_url else None
 
         return title, link, description, image_url
     else:
         print("No latest news found.")
         return None, None, None, None
+
 
 # Load the config and news data
 def load_config():
@@ -42,11 +46,15 @@ def load_config():
 
 def load_news_data():
     if not os.path.exists("data/last_news.json"):
+        print("No news data found, creating default data...")
         return {"channel_id": None, "last_title": None}
     with open("data/last_news.json", "r") as file:
-        return json.load(file)
+        data = json.load(file)
+        print(f"Loaded news data: {data}")
+        return data
 
 def save_news_data(data):
+    print(f"Saving news data: {data}")
     with open("data/last_news.json", "w") as file:
         json.dump(data, file, indent=4)
 
@@ -67,13 +75,16 @@ async def on_ready():
     # If channel is set, start checking news
     if channel_id:
         channel = bot.get_channel(channel_id)
-        print(f"News channel set: {channel.mention}")
-        check_news.start(channel)  # Pass the channel to check_news
+        if channel:
+            print(f"News channel set: {channel.mention}")
+            check_news.start(channel)  # Pass the channel to check_news
+        else:
+            print(f"Invalid channel ID: {channel_id}")
     else:
         print("No news channel set. Please set it first.")
 
 # Asynchronous task to check for news
-@tasks.loop(seconds=60)  # Default to check every 60 seconds
+@tasks.loop(seconds=600)  # Check every 600 seconds (10 minutes)
 async def check_news(channel):
     await bot.wait_until_ready()
 
@@ -86,6 +97,7 @@ async def check_news(channel):
         # If it's new news, send it to the channel
         news_data = load_news_data()
         if title != news_data["last_title"]:
+            print(f"New news found. Saving and posting...")
             news_data["last_title"] = title
             save_news_data(news_data)
 
@@ -103,6 +115,8 @@ async def check_news(channel):
 
             # Send the embed to the channel
             await channel.send(embed=embed)
+        else:
+            print("No new news to post.")
     else:
         print("No news to report.")
 
