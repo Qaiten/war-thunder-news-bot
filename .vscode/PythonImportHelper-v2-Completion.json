@@ -1,0 +1,151 @@
+[
+    {
+        "label": "discord",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "discord",
+        "description": "discord",
+        "detail": "discord",
+        "documentation": {}
+    },
+    {
+        "label": "commands",
+        "importPath": "discord.ext",
+        "description": "discord.ext",
+        "isExtraImport": true,
+        "detail": "discord.ext",
+        "documentation": {}
+    },
+    {
+        "label": "tasks",
+        "importPath": "discord.ext",
+        "description": "discord.ext",
+        "isExtraImport": true,
+        "detail": "discord.ext",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "get_latest_news",
+        "kind": 2,
+        "importPath": "WTNewsCheck",
+        "description": "WTNewsCheck",
+        "peekOfCode": "def get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    # Find the first widget__link element to get the latest news\n    latest_article = soup.find(\"a\", class_=\"widget__link\")\n    if latest_article:\n        # Scrape title from the widget__title div\n        title = latest_article.find_next(\"div\", class_=\"widget__title\").text.strip()\n        # Scrape description from the widget__comment div\n        description = latest_article.find_next(\"div\", class_=\"widget__comment\").text.strip()",
+        "detail": "WTNewsCheck",
+        "documentation": {}
+    },
+    {
+        "label": "load_config",
+        "kind": 2,
+        "importPath": "WTNewsCheck",
+        "description": "WTNewsCheck",
+        "peekOfCode": "def load_config():\n    with open(\"config.json\", \"r\") as file:\n        return json.load(file)\ndef load_news_data():\n    if not os.path.exists(\"data/last_news.json\"):\n        print(\"No news data found, creating default data...\")\n        return {\"channel_id\": None, \"last_title\": None}\n    with open(\"data/last_news.json\", \"r\") as file:\n        data = json.load(file)\n        print(f\"Loaded news data: {data}\")",
+        "detail": "WTNewsCheck",
+        "documentation": {}
+    },
+    {
+        "label": "load_news_data",
+        "kind": 2,
+        "importPath": "WTNewsCheck",
+        "description": "WTNewsCheck",
+        "peekOfCode": "def load_news_data():\n    if not os.path.exists(\"data/last_news.json\"):\n        print(\"No news data found, creating default data...\")\n        return {\"channel_id\": None, \"last_title\": None}\n    with open(\"data/last_news.json\", \"r\") as file:\n        data = json.load(file)\n        print(f\"Loaded news data: {data}\")\n        return data\ndef save_news_data(data):\n    print(f\"Saving news data: {data}\")",
+        "detail": "WTNewsCheck",
+        "documentation": {}
+    },
+    {
+        "label": "save_news_data",
+        "kind": 2,
+        "importPath": "WTNewsCheck",
+        "description": "WTNewsCheck",
+        "peekOfCode": "def save_news_data(data):\n    print(f\"Saving news data: {data}\")\n    with open(\"data/last_news.json\", \"w\") as file:\n        json.dump(data, file, indent=4)\n# Set up the bot and intents\nintents = discord.Intents.default()\nintents.message_content = True  # Ensure message content is enabled\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n# Event when the bot is ready\n@bot.event",
+        "detail": "WTNewsCheck",
+        "documentation": {}
+    },
+    {
+        "label": "NEWS_URL",
+        "kind": 5,
+        "importPath": "WTNewsCheck",
+        "description": "WTNewsCheck",
+        "peekOfCode": "NEWS_URL = \"https://warthunder.com/en/news/\"\n# Update the get_latest_news function to scrape essential information and embed it\ndef get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    # Find the first widget__link element to get the latest news\n    latest_article = soup.find(\"a\", class_=\"widget__link\")\n    if latest_article:\n        # Scrape title from the widget__title div\n        title = latest_article.find_next(\"div\", class_=\"widget__title\").text.strip()",
+        "detail": "WTNewsCheck",
+        "documentation": {}
+    },
+    {
+        "label": "intents",
+        "kind": 5,
+        "importPath": "WTNewsCheck",
+        "description": "WTNewsCheck",
+        "peekOfCode": "intents = discord.Intents.default()\nintents.message_content = True  # Ensure message content is enabled\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n# Event when the bot is ready\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    # Automatically get the #warthunder-news channel\n    news_data = load_news_data()\n    channel_id = news_data[\"channel_id\"]",
+        "detail": "WTNewsCheck",
+        "documentation": {}
+    },
+    {
+        "label": "intents.message_content",
+        "kind": 5,
+        "importPath": "WTNewsCheck",
+        "description": "WTNewsCheck",
+        "peekOfCode": "intents.message_content = True  # Ensure message content is enabled\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n# Event when the bot is ready\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    # Automatically get the #warthunder-news channel\n    news_data = load_news_data()\n    channel_id = news_data[\"channel_id\"]\n    # If channel is set, start checking news",
+        "detail": "WTNewsCheck",
+        "documentation": {}
+    },
+    {
+        "label": "bot",
+        "kind": 5,
+        "importPath": "WTNewsCheck",
+        "description": "WTNewsCheck",
+        "peekOfCode": "bot = commands.Bot(command_prefix=\"!\", intents=intents)\n# Event when the bot is ready\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    # Automatically get the #warthunder-news channel\n    news_data = load_news_data()\n    channel_id = news_data[\"channel_id\"]\n    # If channel is set, start checking news\n    if channel_id:",
+        "detail": "WTNewsCheck",
+        "documentation": {}
+    },
+    {
+        "label": "token",
+        "kind": 5,
+        "importPath": "WTNewsCheck",
+        "description": "WTNewsCheck",
+        "peekOfCode": "token = os.getenv(\"TOKEN\")\nbot.run(token)  # Run the bot with the token from the environment variable\n# TGC Channel id: 1059515770725486692",
+        "detail": "WTNewsCheck",
+        "documentation": {}
+    }
+]

@@ -4,6 +4,10 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 NEWS_URL = "https://warthunder.com/en/news/"
 
@@ -120,7 +124,8 @@ async def check_news(channel):
     else:
         print("No news to report.")
 
-config = load_config()
-bot.run(config.get("token"))  # Run the bot with the token from the config
+# Retrieve the token from the environment variable
+token = os.getenv("TOKEN")
+bot.run(token)  # Run the bot with the token from the environment variable
 
 # TGC Channel id: 1059515770725486692

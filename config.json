@@ -1,4 +1,4 @@
 {
-    "token": "MTM0MTcxMzIzNTE5OTM5MzgzMg.GLPx7j.xml63rh1GNyS8lRiGGsrtSD1aASoMKUK8qmWGA",
+    "token": "env.TOKEN",
     "check_interval": "0 12 * * *"
 }
