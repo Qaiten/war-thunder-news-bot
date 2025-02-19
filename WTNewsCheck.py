@@ -1,10 +1,14 @@
+import os  # Add this line at the top of your file
 import discord
 from discord.ext import commands, tasks
 import requests
 from bs4 import BeautifulSoup
 import json
-import os
 from dotenv import load_dotenv
+
+# Set the working directory to the script's location
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
 
 # Load environment variables from .env file
 load_dotenv()
@@ -128,4 +132,7 @@ async def check_news(channel):
 token = os.getenv("TOKEN")
 bot.run(token)  # Run the bot with the token from the environment variable
 
+
 # TGC Channel id: 1059515770725486692
+
+input("\nPress Enter to exit...")
