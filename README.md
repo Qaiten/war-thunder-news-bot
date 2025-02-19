@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://media.githubusercontent.com/media/Qaiten/war-thunder-news-bot/main/images/HeaderImage.png" alt="WT News Bot Banner" />
+	<img src="https://github.com/Qaiten/war-thunder-news-bot/blob/main/images/HeaderImage.png" alt="WT News Bot Banner" />
 	<br />
 	<a href="https://github.com/Qaiten/war-thunder-news-bot/wiki">
 		<img src="https://img.shields.io/badge/WT_News_Bot-Wiki-orange.svg?style=for-the-badge&logo=github" alt="Wiki" />
