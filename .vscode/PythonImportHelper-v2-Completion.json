@@ -405,7 +405,7 @@
         "kind": 2,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "def get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    # Find the first widget__link element to get the latest news\n    latest_article = soup.find(\"a\", class_=\"widget__link\")\n    if latest_article:\n        # Scrape title from the widget__title div\n        title = latest_article.find_next(\"div\", class_=\"widget__title\").text.strip()\n        # Scrape description from the widget__comment div\n        description = latest_article.find_next(\"div\", class_=\"widget__comment\").text.strip()",
+        "peekOfCode": "def get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    # Get all article elements\n    articles = soup.find_all(\"a\", class_=\"widget__link\")\n    # Load previously seen articles\n    news_data = load_news_data()\n    seen_titles = news_data.get(\"seen_titles\", [])\n    new_articles = []  # Store new articles to return\n    for article in articles:",
         "detail": "WTNewsCheck",
         "documentation": {}
     },
@@ -441,7 +441,7 @@
         "kind": 5,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "script_dir = os.path.dirname(os.path.abspath(__file__))\nos.chdir(script_dir)\n# Load environment variables from .env file\nload_dotenv()\nNEWS_URL = \"https://warthunder.com/en/news/\"\n# Update the get_latest_news function to scrape essential information and embed it\ndef get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    # Find the first widget__link element to get the latest news",
+        "peekOfCode": "script_dir = os.path.dirname(os.path.abspath(__file__))\nos.chdir(script_dir)\n# Load environment variables from .env file\nload_dotenv()\nNEWS_URL = \"https://warthunder.com/en/news/\"\ndef get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    # Get all article elements\n    articles = soup.find_all(\"a\", class_=\"widget__link\")",
         "detail": "WTNewsCheck",
         "documentation": {}
     },
@@ -450,7 +450,7 @@
         "kind": 5,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "NEWS_URL = \"https://warthunder.com/en/news/\"\n# Update the get_latest_news function to scrape essential information and embed it\ndef get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    # Find the first widget__link element to get the latest news\n    latest_article = soup.find(\"a\", class_=\"widget__link\")\n    if latest_article:\n        # Scrape title from the widget__title div\n        title = latest_article.find_next(\"div\", class_=\"widget__title\").text.strip()",
+        "peekOfCode": "NEWS_URL = \"https://warthunder.com/en/news/\"\ndef get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    # Get all article elements\n    articles = soup.find_all(\"a\", class_=\"widget__link\")\n    # Load previously seen articles\n    news_data = load_news_data()\n    seen_titles = news_data.get(\"seen_titles\", [])\n    new_articles = []  # Store new articles to return",
         "detail": "WTNewsCheck",
         "documentation": {}
     },
@@ -486,7 +486,7 @@
         "kind": 5,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "token = os.getenv(\"TOKEN\")\nbot.run(token)  # Run the bot with the token from the environment variable\n# TGC Channel id: 1059515770725486692\ninput(\"\\nPress Enter to exit...\")",
+        "peekOfCode": "token = os.getenv(\"TOKEN\")\nbot.run(token)  # Run the bot with the token from the environment variable\ninput(\"\\nPress Enter to exit...\")",
         "detail": "WTNewsCheck",
         "documentation": {}
     }

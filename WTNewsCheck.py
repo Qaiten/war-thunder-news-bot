@@ -15,36 +15,48 @@ load_dotenv()
 
 NEWS_URL = "https://warthunder.com/en/news/"
 
-# Update the get_latest_news function to scrape essential information and embed it
 def get_latest_news():
     response = requests.get(NEWS_URL)
     soup = BeautifulSoup(response.text, "html.parser")
 
-    # Find the first widget__link element to get the latest news
-    latest_article = soup.find("a", class_="widget__link")
-    
-    if latest_article:
-        # Scrape title from the widget__title div
-        title = latest_article.find_next("div", class_="widget__title").text.strip()
-        
-        # Scrape description from the widget__comment div
-        description = latest_article.find_next("div", class_="widget__comment").text.strip()
+    # Get all article elements
+    articles = soup.find_all("a", class_="widget__link")
 
-        # Scrape image URL from the widget__poster-media img element
-        image_tag = latest_article.find_next("div", class_="widget__poster").find("img")
+    # Load previously seen articles
+    news_data = load_news_data()
+    seen_titles = news_data.get("seen_titles", [])
+
+    new_articles = []  # Store new articles to return
+
+    for article in articles:
+        # Scrape title
+        title_tag = article.find_next("div", class_="widget__title")
+        title = title_tag.text.strip() if title_tag else None
+
+        # Scrape description
+        description_tag = article.find_next("div", class_="widget__comment")
+        description = description_tag.text.strip() if description_tag else None
+
+        # Scrape image URL
+        image_tag = article.find_next("div", class_="widget__poster").find("img")
         image_url = image_tag["data-src"] if image_tag else None
-        
-        # Ensure the image URL is a full URL (not just a relative path)
         if image_url and image_url.startswith("//"):
             image_url = "https:" + image_url
 
-        # Extract the link to the full news article
-        link = f"https://warthunder.com{latest_article['href']}"
+        # Extract the full link
+        link = f"https://warthunder.com{article['href']}"
 
-        return title, link, description, image_url
-    else:
-        print("No latest news found.")
-        return None, None, None, None
+        # Check if the article is already seen
+        if title and title not in seen_titles:
+            new_articles.append((title, link, description, image_url))
+            seen_titles.append(title)  # Add to seen list
+
+    # Save updated seen titles
+    if new_articles:
+        news_data["seen_titles"] = seen_titles
+        save_news_data(news_data)
+
+    return new_articles  # Returns a list of new articles
 
 
 # Load the config and news data
@@ -92,24 +104,14 @@ async def on_ready():
         print("No news channel set. Please set it first.")
 
 # Asynchronous task to check for news
-@tasks.loop(hours=5)  # Check every 5 hours
+@tasks.loop(hours=6)  # Run 4x per day
 async def check_news(channel):
     await bot.wait_until_ready()
+    
+    new_articles = get_latest_news()  # Get new articles
 
-    # Fetch the latest news
-    title, link, description, image_url = get_latest_news()
-
-    if title and link:
-        print(f"Latest news: {title}, {link}")  # This will print every time the bot checks for news
-
-        # If it's new news, send it to the channel
-        news_data = load_news_data()
-        if title != news_data["last_title"]:
-            print(f"New news found. Saving and posting...")
-            news_data["last_title"] = title
-            save_news_data(news_data)
-
-            # Create an embed for the news
+    if new_articles:
+        for title, link, description, image_url in new_articles:
             embed = discord.Embed(
                 title=title,
                 description=description,
@@ -117,16 +119,13 @@ async def check_news(channel):
                 color=discord.Color.blue()
             )
 
-            # If an image exists, set it as the embed's thumbnail
             if image_url:
                 embed.set_thumbnail(url=image_url)
 
-            # Send the embed to the channel
-            await channel.send(embed=embed)
-        else:
-            print("No new news to post.")
+            await channel.send(embed=embed)  # Post each new article
     else:
-        print("No news to report.")
+        print("No new news to post.")
+
 
 # Retrieve the token from the environment variable
 token = os.getenv("TOKEN")
