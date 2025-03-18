@@ -149,6 +149,15 @@
         "documentation": {}
     },
     {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "Tee",
         "kind": 6,
         "importPath": "venv.Scripts.pywin32_postinstall",
@@ -414,7 +423,7 @@
         "kind": 2,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "def load_config():\n    with open(\"config.json\", \"r\") as file:\n        return json.load(file)\ndef load_news_data():\n    if not os.path.exists(\"data/last_news.json\"):\n        print(\"No news data found, creating default data...\")\n        return {\"channel_id\": None, \"last_title\": None}\n    with open(\"data/last_news.json\", \"r\") as file:\n        data = json.load(file)\n        print(f\"Loaded news data: {data}\")",
+        "peekOfCode": "def load_config():\n    with open(\"config.json\", \"r\") as file:\n        return json.load(file)\ndef load_news_data():\n    if not os.path.exists(\"data/last_news.json\"):\n        print(\"No news data found, creating default data...\")\n        return {\"channel_id\": None, \"seen_titles\": []}\n    with open(\"data/last_news.json\", \"r\") as file:\n        data = json.load(file)\n        print(f\"Loaded news data: {data}\")",
         "detail": "WTNewsCheck",
         "documentation": {}
     },
@@ -423,7 +432,7 @@
         "kind": 2,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "def load_news_data():\n    if not os.path.exists(\"data/last_news.json\"):\n        print(\"No news data found, creating default data...\")\n        return {\"channel_id\": None, \"last_title\": None}\n    with open(\"data/last_news.json\", \"r\") as file:\n        data = json.load(file)\n        print(f\"Loaded news data: {data}\")\n        return data\ndef save_news_data(data):\n    print(f\"Saving news data: {data}\")",
+        "peekOfCode": "def load_news_data():\n    if not os.path.exists(\"data/last_news.json\"):\n        print(\"No news data found, creating default data...\")\n        return {\"channel_id\": None, \"seen_titles\": []}\n    with open(\"data/last_news.json\", \"r\") as file:\n        data = json.load(file)\n        print(f\"Loaded news data: {data}\")\n        # Convert old format to new format if necessary\n        if data.get(\"seen_titles\") and isinstance(data[\"seen_titles\"][0], str):\n            data[\"seen_titles\"] = [(title, datetime.datetime.now().isoformat()) for title in data[\"seen_titles\"]]",
         "detail": "WTNewsCheck",
         "documentation": {}
     },
@@ -432,7 +441,16 @@
         "kind": 2,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "def save_news_data(data):\n    print(f\"Saving news data: {data}\")\n    with open(\"data/last_news.json\", \"w\") as file:\n        json.dump(data, file, indent=4)\n# Set up the bot and intents\nintents = discord.Intents.default()\nintents.message_content = True  # Ensure message content is enabled\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n# Event when the bot is ready\n@bot.event",
+        "peekOfCode": "def save_news_data(data):\n    print(f\"Saving news data: {data}\")\n    with open(\"data/last_news.json\", \"w\") as file:\n        json.dump(data, file, indent=4)\ndef clean_old_news_data():\n    news_data = load_news_data()\n    seen_titles = news_data.get(\"seen_titles\", [])\n    current_time = datetime.datetime.now()\n    three_months_ago = current_time - datetime.timedelta(days=90)\n    # Filter out old news",
+        "detail": "WTNewsCheck",
+        "documentation": {}
+    },
+    {
+        "label": "clean_old_news_data",
+        "kind": 2,
+        "importPath": "WTNewsCheck",
+        "description": "WTNewsCheck",
+        "peekOfCode": "def clean_old_news_data():\n    news_data = load_news_data()\n    seen_titles = news_data.get(\"seen_titles\", [])\n    current_time = datetime.datetime.now()\n    three_months_ago = current_time - datetime.timedelta(days=90)\n    # Filter out old news\n    news_data[\"seen_titles\"] = [\n        (title, timestamp) for title, timestamp in seen_titles\n        if datetime.datetime.fromisoformat(timestamp) > three_months_ago\n    ]",
         "detail": "WTNewsCheck",
         "documentation": {}
     },
