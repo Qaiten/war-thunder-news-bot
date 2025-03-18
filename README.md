@@ -23,8 +23,8 @@ Stay up-to-date with the latest **WarThunder** news in your Discord server! This
 1. **Download or Clone** this repository.
    - Ensure you add the bot to your server.
 2. **Set the Discord Channel**: 
-   - Open `/data/last_news.json`
-   - Change the **"channel_id"** field to your desired Discord channel ID.
+   - In discord, use the command "!wtnews". The bot will ask you to post your channel ID or #channel.
+   - The channel will confirm it's change and will set it in the last_news.json for the next cycle.
 3. **Run the Bot**:
    - Double-click `run_WTNewsCheck_bot.bat` _or_
    - Run `WTNewsCheck.py` from the command line.
