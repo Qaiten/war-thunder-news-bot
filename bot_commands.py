@@ -12,13 +12,13 @@ async def set_news_channel(ctx):
         return m.author == ctx.author and m.guild == ctx.guild
 
     try:
-        msg = await bot.wait_for('message', check=check, timeout=60.0)
+        msg = await ctx.bot.wait_for('message', check=check, timeout=60.0)
         if msg.channel_mentions:
             channel = msg.channel_mentions[0]
         else:
             try:
                 channel_id = int(msg.content.strip())
-                channel = bot.get_channel(channel_id)
+                channel = ctx.bot.get_channel(channel_id)
                 if channel is None:
                     raise ValueError("Invalid channel ID")
             except ValueError:
