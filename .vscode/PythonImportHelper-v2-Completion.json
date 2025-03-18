@@ -107,11 +107,94 @@
         "documentation": {}
     },
     {
+        "label": "commands",
+        "importPath": "discord.ext",
+        "description": "discord.ext",
+        "isExtraImport": true,
+        "detail": "discord.ext",
+        "documentation": {}
+    },
+    {
         "label": "tasks",
         "importPath": "discord.ext",
         "description": "discord.ext",
         "isExtraImport": true,
         "detail": "discord.ext",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "load_news_data",
+        "importPath": "data_handler",
+        "description": "data_handler",
+        "isExtraImport": true,
+        "detail": "data_handler",
+        "documentation": {}
+    },
+    {
+        "label": "save_news_data",
+        "importPath": "data_handler",
+        "description": "data_handler",
+        "isExtraImport": true,
+        "detail": "data_handler",
+        "documentation": {}
+    },
+    {
+        "label": "load_news_data",
+        "importPath": "data_handler",
+        "description": "data_handler",
+        "isExtraImport": true,
+        "detail": "data_handler",
+        "documentation": {}
+    },
+    {
+        "label": "save_news_data",
+        "importPath": "data_handler",
+        "description": "data_handler",
+        "isExtraImport": true,
+        "detail": "data_handler",
+        "documentation": {}
+    },
+    {
+        "label": "load_news_data",
+        "importPath": "data_handler",
+        "description": "data_handler",
+        "isExtraImport": true,
+        "detail": "data_handler",
+        "documentation": {}
+    },
+    {
+        "label": "clean_old_news_data",
+        "importPath": "data_handler",
+        "description": "data_handler",
+        "isExtraImport": true,
+        "detail": "data_handler",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -132,15 +215,6 @@
         "documentation": {}
     },
     {
-        "label": "json",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
-        "documentation": {}
-    },
-    {
         "label": "load_dotenv",
         "importPath": "dotenv",
         "description": "dotenv",
@@ -149,12 +223,19 @@
         "documentation": {}
     },
     {
-        "label": "datetime",
-        "kind": 6,
+        "label": "get_latest_news",
+        "importPath": "news",
+        "description": "news",
         "isExtraImport": true,
-        "importPath": "datetime",
-        "description": "datetime",
-        "detail": "datetime",
+        "detail": "news",
+        "documentation": {}
+    },
+    {
+        "label": "set_news_channel",
+        "importPath": "bot_commands",
+        "description": "bot_commands",
+        "isExtraImport": true,
+        "detail": "bot_commands",
         "documentation": {}
     },
     {
@@ -410,48 +491,48 @@
         "documentation": {}
     },
     {
-        "label": "get_latest_news",
-        "kind": 2,
-        "importPath": "WTNewsCheck",
-        "description": "WTNewsCheck",
-        "peekOfCode": "def get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    # Get all article elements\n    articles = soup.find_all(\"a\", class_=\"widget__link\")\n    # Load previously seen articles\n    news_data = load_news_data()\n    seen_titles = news_data.get(\"seen_titles\", [])\n    new_articles = []  # Store new articles to return\n    for article in articles:",
-        "detail": "WTNewsCheck",
-        "documentation": {}
-    },
-    {
-        "label": "load_config",
-        "kind": 2,
-        "importPath": "WTNewsCheck",
-        "description": "WTNewsCheck",
-        "peekOfCode": "def load_config():\n    with open(\"config.json\", \"r\") as file:\n        return json.load(file)\ndef load_news_data():\n    if not os.path.exists(\"data/last_news.json\"):\n        print(\"No news data found, creating default data...\")\n        return {\"channel_id\": None, \"seen_titles\": []}\n    with open(\"data/last_news.json\", \"r\") as file:\n        data = json.load(file)\n        print(f\"Loaded news data: {data}\")",
-        "detail": "WTNewsCheck",
-        "documentation": {}
-    },
-    {
         "label": "load_news_data",
         "kind": 2,
-        "importPath": "WTNewsCheck",
-        "description": "WTNewsCheck",
-        "peekOfCode": "def load_news_data():\n    if not os.path.exists(\"data/last_news.json\"):\n        print(\"No news data found, creating default data...\")\n        return {\"channel_id\": None, \"seen_titles\": []}\n    with open(\"data/last_news.json\", \"r\") as file:\n        data = json.load(file)\n        print(f\"Loaded news data: {data}\")\n        # Convert old format to new format if necessary\n        if data.get(\"seen_titles\") and isinstance(data[\"seen_titles\"][0], str):\n            data[\"seen_titles\"] = [(title, datetime.datetime.now().isoformat()) for title in data[\"seen_titles\"]]",
-        "detail": "WTNewsCheck",
+        "importPath": "data_handler",
+        "description": "data_handler",
+        "peekOfCode": "def load_news_data():\n    if not os.path.exists(\"data/last_news.json\"):\n        print(\"No news data found, creating default data...\")\n        return {\"channel_id\": None, \"seen_titles\": []}\n    with open(\"data/last_news.json\", \"r\") as file:\n        data = json.load(file)\n        print(f\"Loaded news data: {data}\")\n        if data.get(\"seen_titles\") and isinstance(data[\"seen_titles\"][0], str):\n            data[\"seen_titles\"] = [(title, datetime.datetime.now().isoformat()) for title in data[\"seen_titles\"]]\n        return data",
+        "detail": "data_handler",
         "documentation": {}
     },
     {
         "label": "save_news_data",
         "kind": 2,
-        "importPath": "WTNewsCheck",
-        "description": "WTNewsCheck",
-        "peekOfCode": "def save_news_data(data):\n    print(f\"Saving news data: {data}\")\n    with open(\"data/last_news.json\", \"w\") as file:\n        json.dump(data, file, indent=4)\ndef clean_old_news_data():\n    news_data = load_news_data()\n    seen_titles = news_data.get(\"seen_titles\", [])\n    current_time = datetime.datetime.now()\n    three_months_ago = current_time - datetime.timedelta(days=90)\n    # Filter out old news",
-        "detail": "WTNewsCheck",
+        "importPath": "data_handler",
+        "description": "data_handler",
+        "peekOfCode": "def save_news_data(data):\n    print(f\"Saving news data: {data}\")\n    with open(\"data/last_news.json\", \"w\") as file:\n        json.dump(data, file, indent=4)\ndef clean_old_news_data():\n    news_data = load_news_data()\n    seen_titles = news_data.get(\"seen_titles\", [])\n    current_time = datetime.datetime.now()\n    three_months_ago = current_time - datetime.timedelta(days=90)\n    news_data[\"seen_titles\"] = [",
+        "detail": "data_handler",
         "documentation": {}
     },
     {
         "label": "clean_old_news_data",
         "kind": 2,
-        "importPath": "WTNewsCheck",
-        "description": "WTNewsCheck",
-        "peekOfCode": "def clean_old_news_data():\n    news_data = load_news_data()\n    seen_titles = news_data.get(\"seen_titles\", [])\n    current_time = datetime.datetime.now()\n    three_months_ago = current_time - datetime.timedelta(days=90)\n    # Filter out old news\n    news_data[\"seen_titles\"] = [\n        (title, timestamp) for title, timestamp in seen_titles\n        if datetime.datetime.fromisoformat(timestamp) > three_months_ago\n    ]",
-        "detail": "WTNewsCheck",
+        "importPath": "data_handler",
+        "description": "data_handler",
+        "peekOfCode": "def clean_old_news_data():\n    news_data = load_news_data()\n    seen_titles = news_data.get(\"seen_titles\", [])\n    current_time = datetime.datetime.now()\n    three_months_ago = current_time - datetime.timedelta(days=90)\n    news_data[\"seen_titles\"] = [\n        (title, timestamp) for title, timestamp in seen_titles\n        if datetime.datetime.fromisoformat(timestamp) > three_months_ago\n    ]\n    save_news_data(news_data)",
+        "detail": "data_handler",
+        "documentation": {}
+    },
+    {
+        "label": "get_latest_news",
+        "kind": 2,
+        "importPath": "news",
+        "description": "news",
+        "peekOfCode": "def get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    articles = soup.find_all(\"a\", class_=\"widget__link\")\n    news_data = load_news_data()\n    seen_titles = news_data.get(\"seen_titles\", [])\n    new_articles = []\n    for article in articles:\n        title_tag = article.find_next(\"div\", class_=\"widget__title\")\n        title = title_tag.text.strip() if title_tag else None",
+        "detail": "news",
+        "documentation": {}
+    },
+    {
+        "label": "NEWS_URL",
+        "kind": 5,
+        "importPath": "news",
+        "description": "news",
+        "peekOfCode": "NEWS_URL = \"https://warthunder.com/en/news/\"\ndef get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    articles = soup.find_all(\"a\", class_=\"widget__link\")\n    news_data = load_news_data()\n    seen_titles = news_data.get(\"seen_titles\", [])\n    new_articles = []\n    for article in articles:\n        title_tag = article.find_next(\"div\", class_=\"widget__title\")",
+        "detail": "news",
         "documentation": {}
     },
     {
@@ -459,16 +540,7 @@
         "kind": 5,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "script_dir = os.path.dirname(os.path.abspath(__file__))\nos.chdir(script_dir)\n# Load environment variables from .env file\nload_dotenv()\nNEWS_URL = \"https://warthunder.com/en/news/\"\ndef get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    # Get all article elements\n    articles = soup.find_all(\"a\", class_=\"widget__link\")",
-        "detail": "WTNewsCheck",
-        "documentation": {}
-    },
-    {
-        "label": "NEWS_URL",
-        "kind": 5,
-        "importPath": "WTNewsCheck",
-        "description": "WTNewsCheck",
-        "peekOfCode": "NEWS_URL = \"https://warthunder.com/en/news/\"\ndef get_latest_news():\n    response = requests.get(NEWS_URL)\n    soup = BeautifulSoup(response.text, \"html.parser\")\n    # Get all article elements\n    articles = soup.find_all(\"a\", class_=\"widget__link\")\n    # Load previously seen articles\n    news_data = load_news_data()\n    seen_titles = news_data.get(\"seen_titles\", [])\n    new_articles = []  # Store new articles to return",
+        "peekOfCode": "script_dir = os.path.dirname(os.path.abspath(__file__))\nos.chdir(script_dir)\nload_dotenv()\nintents = discord.Intents.default()\nintents.message_content = True\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    news_data = load_news_data()",
         "detail": "WTNewsCheck",
         "documentation": {}
     },
@@ -477,7 +549,7 @@
         "kind": 5,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "intents = discord.Intents.default()\nintents.message_content = True  # Ensure message content is enabled\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n# Event when the bot is ready\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    # Automatically get the #warthunder-news channel\n    news_data = load_news_data()\n    channel_id = news_data[\"channel_id\"]",
+        "peekOfCode": "intents = discord.Intents.default()\nintents.message_content = True\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    news_data = load_news_data()\n    channel_id = news_data[\"channel_id\"]\n    if channel_id:\n        channel = bot.get_channel(channel_id)",
         "detail": "WTNewsCheck",
         "documentation": {}
     },
@@ -486,7 +558,7 @@
         "kind": 5,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "intents.message_content = True  # Ensure message content is enabled\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n# Event when the bot is ready\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    # Automatically get the #warthunder-news channel\n    news_data = load_news_data()\n    channel_id = news_data[\"channel_id\"]\n    # If channel is set, start checking news",
+        "peekOfCode": "intents.message_content = True\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    news_data = load_news_data()\n    channel_id = news_data[\"channel_id\"]\n    if channel_id:\n        channel = bot.get_channel(channel_id)\n        if channel:",
         "detail": "WTNewsCheck",
         "documentation": {}
     },
@@ -495,7 +567,7 @@
         "kind": 5,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "bot = commands.Bot(command_prefix=\"!\", intents=intents)\n# Event when the bot is ready\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    # Automatically get the #warthunder-news channel\n    news_data = load_news_data()\n    channel_id = news_data[\"channel_id\"]\n    # If channel is set, start checking news\n    if channel_id:",
+        "peekOfCode": "bot = commands.Bot(command_prefix=\"!\", intents=intents)\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    news_data = load_news_data()\n    channel_id = news_data[\"channel_id\"]\n    if channel_id:\n        channel = bot.get_channel(channel_id)\n        if channel:\n            print(f\"News channel set: {channel.mention}\")",
         "detail": "WTNewsCheck",
         "documentation": {}
     },
@@ -504,7 +576,7 @@
         "kind": 5,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "token = os.getenv(\"TOKEN\")\nbot.run(token)  # Run the bot with the token from the environment variable\ninput(\"\\nPress Enter to exit...\")",
+        "peekOfCode": "token = os.getenv(\"TOKEN\")\nbot.run(token)\ninput(\"\\nPress Enter to exit...\")",
         "detail": "WTNewsCheck",
         "documentation": {}
     }
