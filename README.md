@@ -21,8 +21,7 @@ Stay up-to-date with the latest **WarThunder** news in your Discord server! This
 
 ## 📌 How to Use
 1. **Download or Clone** this repository.
-1. **Download or Clone** this repository.
-2. **Add the Bot to Your Server**: [Click here to add the bot](http://bit.ly/41WhTVF)
+2. **Add the Bot to Your Server**: [Warthunder News Bot](http://bit.ly/41WhTVF)
 3. **Set the Discord Channel**: 
 	- In discord, use the command `!wtnews`. The bot will ask you to post your channel ID or #channel.
 	- The channel will confirm it's change and will set it in the `last_news.json` for the next cycle.
@@ -32,13 +31,13 @@ Stay up-to-date with the latest **WarThunder** news in your Discord server! This
 5. **That's it! 🎉**
 	- The bot will check for new articles daily at **12 noon** (system time) and post them automatically.
 	- The bot will also check from previously posted articles kept in it's last_news.json storage and not post duplicate items.
-2. **Set the Discord Channel**: 
+6. **Set the Discord Channel**: 
    - In discord, use the command `!wtnews`. The bot will ask you to post your channel ID or #channel.
    - The channel will confirm it's change and will set it in the `last_news.json` for the next cycle.
-3. **Run the Bot**:
+7. **Run the Bot**:
    - Double-click `run_WTNewsCheck_bot.bat` _or_
    - Run `WTNewsCheck.py` from the command line.
-4. **That's it! 🎉**
+8. **That's it! 🎉**
    - The bot will check for new articles daily at **12 noon** (system time) and post them automatically.
    - The bot will also check from previously posted articles kept in it's last_news.json storage and not post duplicate items.
 
