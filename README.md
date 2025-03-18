@@ -9,13 +9,29 @@
 	</a>
 </p>
 
-# WarThunder News Bot
-Allows posting of any WarThunder news article to a channel in Discord.
+# 🚀 WarThunder News Bot
 
-It does this by detecting the newest element on the news-page when ran and posting it with a short description and embed URL to the channel of the users choosing (see below). If you have a cloud or just want to keep the .bat running, it will do so  once per day.
+Stay up-to-date with the latest **WarThunder** news in your Discord server! This bot automatically detects and posts the newest WarThunder news article to a Discord channel of your choice. 📢
 
-## To Use:
-1. Download the repository or clone it.
-2. Change the "channel_id" field in "/data/last_news.json" to the respective channel id in your discord.
-3. Click "run_WTNewsCheck_bot.bat" or run the command "WTNewsCheck.py" for it to run.
-4. It will re-check at 12 noon per day (on the system time), once a day.
+## ✨ Features
+- 📰 **Auto-detects** the latest news article from the WarThunder website.
+- 🤖 **Posts** the article with a short description and an embedded link.
+- ⏰ **Runs Daily**—checks for news at **12 noon (system time)** every day.
+- ☁️ **Cloud & Local Support**—Run it manually or keep it running on a cloud service!
+
+## 📌 How to Use
+1. **Download or Clone** this repository.
+   - Ensure you add the bot to your server.
+2. **Set the Discord Channel**: 
+   - Open `/data/last_news.json`
+   - Change the **"channel_id"** field to your desired Discord channel ID.
+3. **Run the Bot**:
+   - Double-click `run_WTNewsCheck_bot.bat` _or_
+   - Run `WTNewsCheck.py` from the command line.
+4. **That's it! 🎉**
+   - The bot will check for new articles daily at **12 noon** (system time) and post them automatically.
+   - The bot will also check from previously posted articles kept in it's last_news.json storage and not post duplicate items.
+
+---
+
+💡 *Want to improve or contribute? Feel free to fork and submit a PR!* 😃
