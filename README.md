@@ -5,7 +5,10 @@
 		<img src="https://img.shields.io/badge/WT_News_Bot-Wiki-orange.svg?style=for-the-badge&logo=github" alt="Wiki" />
 	</a>
 	<a href="https://discord.gg/XS6w8D8">
-		<img src="https://img.shields.io/discord/532683310409842728.svg?label=Discord&logo=Discord&colorB=7289da&style=for-the-badge" alt="Discord Server">
+		<img src="https://img.shields.io/badge/Qaiten's%20Discord-FECC00.svg?style=for-the-badge&logo=discord&logoColor=white" alt="Qaiten's Discord Server">
+	</a>
+	<a href="http://bit.ly/41WhTVF">
+		<img src="https://img.shields.io/badge/Invite%20Warthunder%20News%20Bot-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Bot Invite Link">
 	</a>
 </p>
 
