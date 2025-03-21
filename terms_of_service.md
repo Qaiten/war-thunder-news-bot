@@ -1,6 +1,6 @@
 # 📜 Terms of Service
 
-_Last Updated: [Insert Date]_
+_Last Updated: [21/03/2025]_
 
 ## 1. Introduction
 Welcome to the **WarThunder News Bot**! By using this bot, you agree to abide by these Terms of Service. If you do not agree with any part of these terms, please refrain from using the bot.

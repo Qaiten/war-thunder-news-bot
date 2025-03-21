@@ -123,6 +123,22 @@
         "documentation": {}
     },
     {
+        "label": "Select",
+        "importPath": "discord.ui",
+        "description": "discord.ui",
+        "isExtraImport": true,
+        "detail": "discord.ui",
+        "documentation": {}
+    },
+    {
+        "label": "View",
+        "importPath": "discord.ui",
+        "description": "discord.ui",
+        "isExtraImport": true,
+        "detail": "discord.ui",
+        "documentation": {}
+    },
+    {
         "label": "asyncio",
         "kind": 6,
         "isExtraImport": true,
@@ -491,6 +507,15 @@
         "documentation": {}
     },
     {
+        "label": "ChannelSelectView",
+        "kind": 6,
+        "importPath": "bot_commands",
+        "description": "bot_commands",
+        "peekOfCode": "class ChannelSelectView(View):\n    def __init__(self, ctx):\n        super().__init__()\n        self.ctx = ctx\n        self.value = None\n    @discord.ui.select(\n        placeholder=\"Choose to add or remove a channel from use...\",\n        options=[\n            discord.SelectOption(label=\"Add Channel\", value=\"add\"),\n            discord.SelectOption(label=\"Remove Channel\", value=\"remove\")",
+        "detail": "bot_commands",
+        "documentation": {}
+    },
+    {
         "label": "load_news_data",
         "kind": 2,
         "importPath": "data_handler",
@@ -549,7 +574,7 @@
         "kind": 5,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "intents = discord.Intents.default()\nintents.message_content = True\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    news_data = load_news_data()\n    channel_id = news_data[\"channel_id\"]\n    if channel_id:\n        channel = bot.get_channel(channel_id)",
+        "peekOfCode": "intents = discord.Intents.default()\nintents.message_content = True\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    news_data = load_news_data()\n    channel_ids = news_data.get(\"channel_ids\", [])\n    if channel_ids:\n        channels = [bot.get_channel(channel_id) for channel_id in channel_ids if bot.get_channel(channel_id)]",
         "detail": "WTNewsCheck",
         "documentation": {}
     },
@@ -558,7 +583,7 @@
         "kind": 5,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "intents.message_content = True\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    news_data = load_news_data()\n    channel_id = news_data[\"channel_id\"]\n    if channel_id:\n        channel = bot.get_channel(channel_id)\n        if channel:",
+        "peekOfCode": "intents.message_content = True\nbot = commands.Bot(command_prefix=\"!\", intents=intents)\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    news_data = load_news_data()\n    channel_ids = news_data.get(\"channel_ids\", [])\n    if channel_ids:\n        channels = [bot.get_channel(channel_id) for channel_id in channel_ids if bot.get_channel(channel_id)]\n        if channels:",
         "detail": "WTNewsCheck",
         "documentation": {}
     },
@@ -567,7 +592,7 @@
         "kind": 5,
         "importPath": "WTNewsCheck",
         "description": "WTNewsCheck",
-        "peekOfCode": "bot = commands.Bot(command_prefix=\"!\", intents=intents)\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    news_data = load_news_data()\n    channel_id = news_data[\"channel_id\"]\n    if channel_id:\n        channel = bot.get_channel(channel_id)\n        if channel:\n            print(f\"News channel set: {channel.mention}\")",
+        "peekOfCode": "bot = commands.Bot(command_prefix=\"!\", intents=intents)\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name} ({bot.user.id})')\n    news_data = load_news_data()\n    channel_ids = news_data.get(\"channel_ids\", [])\n    if channel_ids:\n        channels = [bot.get_channel(channel_id) for channel_id in channel_ids if bot.get_channel(channel_id)]\n        if channels:\n            print(f\"News channels set: {', '.join([channel.mention for channel in channels])}\")",
         "detail": "WTNewsCheck",
         "documentation": {}
     },

@@ -1,5 +1,8 @@
 {
-    "channel_id": 1059515770725486692,
+    "channel_ids": [
+        1352580808279457813,
+        1059515770725486692
+    ],
     "last_title": "Get the F-5A(G) in the Freedom Fighter Event!",
     "seen_titles": [
         [
@@ -149,6 +152,10 @@
         [
             "Meet the \u201cHornet\u2019s Sting\u201d Major Update!",
             "2025-03-18T17:15:53.771146"
+        ],
+        [
+            "The German La-5FN Temporarily Returns to Mark the La-5\u2019s First Flight!",
+            "2025-03-21T11:09:29.004791"
         ]
     ]
 }

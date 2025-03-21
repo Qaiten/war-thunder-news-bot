@@ -1,6 +1,6 @@
 # 🔒 Privacy Policy
 
-_Last Updated: [Insert Date]_
+_Last Updated: [21/03/2025]_
 
 ## 1. Introduction
 Welcome to the **WarThunder News Bot**! Your privacy is important to us. This policy outlines what data we collect, how it is used, and your rights regarding that data.
