@@ -20,22 +20,22 @@ async def on_ready():
     print(f'Logged in as {bot.user.name} ({bot.user.id})')
 
     news_data = load_news_data()
-    channel_id = news_data["channel_id"]
+    channel_ids = news_data.get("channel_ids", [])
     
-    if channel_id:
-        channel = bot.get_channel(channel_id)
-        if channel:
-            print(f"News channel set: {channel.mention}")
-            check_news.start(channel)
+    if channel_ids:
+        channels = [bot.get_channel(channel_id) for channel_id in channel_ids if bot.get_channel(channel_id)]
+        if channels:
+            print(f"News channels set: {', '.join([channel.mention for channel in channels])}")
+            check_news.start(channels)
         else:
-            print(f"Invalid channel ID: {channel_id}")
+            print("No valid channels found.")
     else:
-        print("No news channel set. Please set it first.")
+        print("No news channels set. Please set them first.")
     
     clean_news_data.start()
 
 @tasks.loop(hours=6)
-async def check_news(channel):
+async def check_news(channels):
     await bot.wait_until_ready()
     
     new_articles = get_latest_news()
@@ -52,7 +52,8 @@ async def check_news(channel):
             if image_url:
                 embed.set_thumbnail(url=image_url)
 
-            await channel.send(embed=embed)
+            for channel in channels:
+                await channel.send(embed=embed)
     else:
         print("No new news to post.")
 
